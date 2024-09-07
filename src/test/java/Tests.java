@@ -42,9 +42,4 @@ public class Tests {
 
         Assertions.assertTrue($(".modal-title").text().contains("Thanks for submitting the form"));
     }
-
-    @AfterEach
-    void tearDown() {
-        closeWebDriver();
-    }
 }
