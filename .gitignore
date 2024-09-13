@@ -2,6 +2,7 @@ HELP.md
 build/
 !**/src/main/**
 !**/src/test/**
+src/test/java/Snippets.java
 
 ### IntelliJ IDEA ###
 .idea

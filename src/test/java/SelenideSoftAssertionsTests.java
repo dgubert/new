@@ -17,7 +17,7 @@ public class SelenideSoftAssertionsTests {
     }
 
     @Test
-    void junit5ShouldBeOnSoftAssertionsPage() {
+    void junit5ShouldBeOnSoftAssertionsPageTest() {
         open("/selenide/selenide");
         $("[data-content='Wiki']").click();
         $("#wiki-body").$("[href*='SoftAssertions'").click();
