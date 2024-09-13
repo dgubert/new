@@ -19,16 +19,20 @@ public class HerokuAppTests {
     @Test
     void dragAndDropByActionsTest() {
         open("/drag_and_drop");
-        $(".column header").shouldHave(text("A"));
+        $("#column-a").shouldHave(text("A"));
+        $("#column-b").shouldHave(text("B"));
         actions().dragAndDrop($("#column-a"), $("#column-b")).release().perform();
-        $(".column header").shouldHave(text("B"));
+        $("#column-a").shouldHave(text("B"));
+        $("#column-b").shouldHave(text("A"));
     }
 
     @Test
     void dragAndDropNotByActionsTest() {
         open("/drag_and_drop");
-        $(".column header").shouldHave(text("A"));
+        $("#column-a").shouldHave(text("A"));
+        $("#column-b").shouldHave(text("B"));
         $("#column-a").dragAndDrop(to($("#column-b")));
-        $(".column header").shouldHave(text("B"));
+        $("#column-a").shouldHave(text("B"));
+        $("#column-b").shouldHave(text("A"));
     }
 }
