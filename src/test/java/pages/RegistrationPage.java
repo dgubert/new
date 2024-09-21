@@ -10,7 +10,7 @@ import static pages.component.TableComponent.checkTableData;
 
 public class RegistrationPage {
 
-    private SelenideElement firstNameInput =  $("#firstName"),
+    private final SelenideElement firstNameInput =  $("#firstName"),
         lastNameInput = $("#lastName"),
         emailInput = $("#userEmail"),
         genderSelect = $("#genterWrapper"),
