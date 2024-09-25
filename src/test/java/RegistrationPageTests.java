@@ -1,6 +1,9 @@
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
+
+import static utils.RandomUtils.*;
 
 public class RegistrationPageTests {
 
@@ -17,45 +20,67 @@ public class RegistrationPageTests {
 
     @Test
     void successfulRegistrationTest() {
+        String firstName = getFirstName(),
+                lastName = getLastName(),
+                email = getEmail(),
+                gender = getGender(),
+                number = getNumber(),
+                dayOfBirth = getDayOfBirthDate(),
+                monthOfBirth = getMonthOfBirthDate(),
+                yearOfBirth = getYearOfBirthDate(),
+                subject = getSubject(),
+                hobby = getHobby(),
+                picture = getPicture(),
+                address = getAddress(),
+                state = getState(),
+                city = getCity(state);
+
         registrationPage.openPage()
-                .setFirstName("Denis")
-                .setLastName("Gubert")
-                .setUserEmail("denis@gubert.com")
-                .selectGender("Male")
-                .setUserNumber("9991001010")
-                .setDateOfBirth("10", "April", "1986")
-                .setSubject("Maths")
-                .setHobby("Reading")
-                .setPicture("smile.png")
-                .setAddress("Saint-Petersburg, Lipovaya Avenue 9")
-                .setState("NCR")
-                .setCity("Noida")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(email)
+                .selectGender(gender)
+                .setUserNumber(number)
+                .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
+                .setSubject(subject)
+                .setHobby(hobby)
+                .setPicture(picture)
+                .setAddress(address)
+                .setState(state)
+                .setCity(city)
                 .submitForm();
 
-        registrationPage.checkResult("Student Name", "Denis Gubert")
-                .checkResult("Student Email", "denis@gubert.com")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "9991001010")
-                .checkResult("Date of Birth", "10 April,1986")
-                .checkResult("Subjects", "Maths")
-                .checkResult("Hobbies", "Reading")
-                .checkResult("Picture", "smile.png")
-                .checkResult("Address", "Saint-Petersburg, Lipovaya Avenue 9")
-                .checkResult("State and City", "NCR Noida");
+        registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Student Email", email)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", number)
+                .checkResult("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
+                .checkResult("Subjects", subject)
+                .checkResult("Hobbies", hobby)
+                .checkResult("Picture", picture)
+                .checkResult("Address", address)
+                .checkResult("State and City", state + " " + city);
     }
+
 
     @Test
     void successfulRegistrationRequiredFieldsTest() {
+        String firstName = getFirstName(),
+                lastName = getLastName(),
+                gender = getGender(),
+                number = getNumber();
+
+
         registrationPage.openPage()
-                .setFirstName("Denis")
-                .setLastName("Gubert")
-                .selectGender("Male")
-                .setUserNumber("9991001010")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .selectGender(gender)
+                .setUserNumber(number)
                 .submitForm();
 
-        registrationPage.checkResult("Student Name", "Denis Gubert")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "9991001010");
+        registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", number);
     }
 
     @Test
