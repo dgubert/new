@@ -2,38 +2,29 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
+import utils.RandomUtils;
 
-import static utils.RandomUtils.*;
-
-public class RegistrationPageTests {
+public class RegistrationPageTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
-
-    @BeforeAll
-    static void setUp() {
-        Configuration.browserSize = "1920*1080";
-        Configuration.browser = "chrome";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
-    }
+    RandomUtils randomUtils = new RandomUtils();
 
     @Test
     void successfulRegistrationTest() {
-        String firstName = getFirstName(),
-                lastName = getLastName(),
-                email = getEmail(),
-                gender = getGender(),
-                number = getNumber(),
-                dayOfBirth = getDayOfBirthDate(),
-                monthOfBirth = getMonthOfBirthDate(),
-                yearOfBirth = getYearOfBirthDate(),
-                subject = getSubject(),
-                hobby = getHobby(),
-                picture = getPicture(),
-                address = getAddress(),
-                state = getState(),
-                city = getCity(state);
+        String firstName = randomUtils.getFirstName(),
+                lastName = randomUtils.getLastName(),
+                email = randomUtils.getEmail(),
+                gender = randomUtils.getGender(),
+                number = randomUtils.getNumber(),
+                dayOfBirth = randomUtils.getDayOfBirthDate(),
+                monthOfBirth = randomUtils.getMonthOfBirthDate(),
+                yearOfBirth = randomUtils.getYearOfBirthDate(),
+                subject = randomUtils.getSubject(),
+                hobby = randomUtils.getHobby(),
+                picture = randomUtils.getPicture(),
+                address = randomUtils.getAddress(),
+                state = randomUtils.getState(),
+                city = randomUtils.getCity(state);
 
         registrationPage.openPage()
                 .setFirstName(firstName)
@@ -65,10 +56,10 @@ public class RegistrationPageTests {
 
     @Test
     void successfulRegistrationRequiredFieldsTest() {
-        String firstName = getFirstName(),
-                lastName = getLastName(),
-                gender = getGender(),
-                number = getNumber();
+        String firstName = randomUtils.getFirstName(),
+                lastName = randomUtils.getLastName(),
+                gender = randomUtils.getGender(),
+                number = randomUtils.getNumber();
 
 
         registrationPage.openPage()
